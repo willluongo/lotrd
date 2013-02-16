@@ -91,7 +91,7 @@ eom
 	end
 
 	def fight(player, mob)
-		# TODO Refactor to make more effective
+		# TODO: Refactor to make more effective
 		if (rand(@player.initiative) < rand(mob.initiative))
 			# Mob goes first!
 			puts "But a #{mob.name} finds you first, and he doesn't look happy about it!"
@@ -147,7 +147,7 @@ eom
 	end
 
 	def save_and_shutdown
-		# TODO persist high scores, player if they are alive, etc
+		# TODO: persist high scores, player if they are alive, etc
 		puts "Good bye!"
 	end
 
