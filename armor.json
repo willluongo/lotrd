@@ -1,0 +1,14 @@
+[
+{
+	"name":"leather jacket",
+	"use":"dents the leather",
+	"cost":20,
+	"armor_value":3
+},
+{
+	"name":"canvas jacket",
+	"use":"scrapes off some paint",
+	"cost":30,
+	"armor_value":4
+}
+]
