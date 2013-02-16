@@ -1,0 +1,22 @@
+{
+	"level_1": [
+	{
+		"name":"rat",
+		"weapon":"tiny pink claws",
+		"max_damage":3,
+		"hp":3
+	},
+	{
+		"name":"tadpole",
+		"weapon":"cute little tail",
+		"max_damage":2,
+		"hp":2
+	},
+	{
+		"name":"kobold runt",
+		"weapon": "poorly crafted club",
+		"max_damage":4,
+		"hp":4
+	}	
+	]
+}
