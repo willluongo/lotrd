@@ -38,6 +38,12 @@ class LotRD
 
 	end
 
+	# Prompt is the workhorse of user interactions
+    #
+    # * no arguments defaults to "Hit enter to continue"
+    # * One argument is basically a pause with a custom prompt
+    # * Automatically handles invalid choices, only returns a valid selection
+
 	def prompt(string = "Hit enter to continue", *args)
 		args.map! {|item| item.to_s.downcase}
 		puts string
@@ -53,12 +59,12 @@ class LotRD
 	end
 
 	def display_help
-		puts "This is the help!"
-		prompt("[1] Exit\n[2] Replay \n[DELETE] Delete your character.", 1, 2, "DELETE")
+		# TODO: Improve quality of in game help
+		puts File.open('./help.txt').read
+		prompt("Got it? Good. Press enter.")
 	end
 
 
-	# TODO: Repair game loop so that everything points back to the main menu, rather than calling it and nesting into functions
 	def main_menu
 		system("clear")
 		puts @player.status
