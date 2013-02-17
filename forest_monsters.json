@@ -17,6 +17,17 @@
 		"weapon": "poorly crafted club",
 		"max_damage":4,
 		"hp":4
-	}	
-	]
-}
+	},
+	{
+		"name":"angry turkey",
+		"weapon": "flailing gobbler",
+		"max_damage":5,
+		"hp":5
+	},
+	{
+		"name":"hot-headed candle",
+		"weapon": "red flame",
+		"max_damage":4,
+		"hp":4
+	}
+]}

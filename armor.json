@@ -10,5 +10,11 @@
 	"use":"scrapes off some paint",
 	"cost":30,
 	"armor_value":4
+},
+{
+	"name":"chainmail vest",
+	"use":"barely manages to rattle the chains",
+	"cost":40,
+	"armor_value":5
 }
 ]

@@ -6,8 +6,10 @@ require_relative 'mob.rb'
 class LotRD
 	def initialize()
 		@forest_monsters = JSON.load(File.open('./forest_monsters.json').read)
+		@armor_store = JSON.load(File.open('./armor.json').read)
 		@log = Logger.new("lotrd.log")
 		@log.level = Logger::DEBUG
+		@play = true
 	end
 
 	def rand(limit)
@@ -30,11 +32,13 @@ class LotRD
 		else
 			puts "Somehow you tricked my menu!"
 		end
-		main_menu
+		while @play
+			main_menu
+		end
 
 	end
 
-	def prompt(string, *args)
+	def prompt(string = "Hit enter to continue", *args)
 		args.map! {|item| item.to_s.downcase}
 		puts string
 		if args.length == 0
@@ -42,7 +46,7 @@ class LotRD
 			return nil
 		else
 			unless args.include?(choice = gets.chomp.downcase)
-				return prompt("Invalid selection. Please try the options in brackets []\n" + string, *args)
+				return prompt((string.include?("Invalid selection.") ? string : "Invalid selection. Please try the options in brackets []\n" + string), *args)
 			end
 			return choice
 		end
@@ -53,6 +57,8 @@ class LotRD
 		prompt("[1] Exit\n[2] Replay \n[DELETE] Delete your character.", 1, 2, "DELETE")
 	end
 
+
+	# TODO: Repair game loop so that everything points back to the main menu, rather than calling it and nesting into functions
 	def main_menu
 		system("clear")
 		puts @player.status
@@ -69,10 +75,12 @@ eom
 			save_and_shutdown
 		when "f"
 			forest_fight
+		when "r"
+			visit_inn
+		when "a"
+			visit_armory
 		else
-			prompt "Sorry, that isn't implemented yet. Press any key to continue."
-			main_menu
-
+			prompt "Sorry, that isn't implemented yet. Press enter to continue."
 		end
 
 	end
@@ -92,6 +100,7 @@ eom
 
 	def fight(player, mob)
 		# TODO: Refactor to make more effective
+		fighting = true
 		if (rand(@player.initiative) < rand(mob.initiative))
 			# Mob goes first!
 			puts "But a #{mob.name} finds you first, and he doesn't look happy about it!"
@@ -104,7 +113,7 @@ eom
 						mob.attack(@player)
 					end
 				when "r"
-					main_menu
+					#drop out to main menu
 				end
 			end			
 		else
@@ -117,24 +126,78 @@ eom
 					mob.attack(@player)
 				end
 			when "r"
-				main_menu
+					fighting = false 
+					#drop out to main menu
 			end
 		end
-		if mob.alive and @player.hp > 0 
+		if mob.alive and @player.hp > 0 and fighting
 			fight(@player, mob)
 		elsif @player.hp <= 0
 			player_death
-		else
+		elsif !mob.alive
 			@player.gain_xp(10)
 			@player.gain_gold(10)
-			prompt("Press any key to continue.")
-			main_menu
+			prompt
+		else
+			#TODO: Check against compared initiatives to see if run succeeds... else free hit for mob!
+			if rand(3) == 0
+				puts "You barely escape, but your pockets feel lighter... some gold must have fallen out during your escape!"
+				@player.lose_gold
+			else
+				puts "You barely escape from the #{mob.name}!"
+			end
+			prompt
 		end
 	end
 
+	def visit_armory
+		@log.debug(@armor_store)
+		clear
+		puts "Welcome to the Armor Shop!"
+		item_string = ""
+		item_no = 0
+		item_list = []
+		@armor_store.each do |item|
+			item_no = item_no + 1
+			item_string = item_string + "\n[#{item_no}] A #{item["name"]}. Armor value #{item["armor_value"]}. Cost: #{item["cost"]} gold."
+			item_list.push(item_no)
+		end
+		# TODO: Add option to sell armor
+		select = prompt(item_string + "\n[L]eave the store", *item_list, :l)
+		if select == "l"
+			# drop out to main menu
+		else
+			if @player.purchase_armor(select, @armor_store)
+				prompt
+			else
+				prompt
+				visit_armory
+			end
+		end
+	end
+
+	def visit_inn
+		clear
+		puts "Welcome to the Ruby Dragon Inn!"
+		case prompt("[S]tay for the night, and recover from today's adventures. (10 Gold)\n[L]eave.", :s, :l)
+		when "s"
+			if @player.inn(10)
+				prompt
+			else
+				prompt
+				visit_inn
+			end
+		when "l"
+			# drop through to main_menu
+		end
+
+
+	end
+
+
 	def player_death
-		prompt "Press any key to continue."
-		system("clear")
+		prompt
+		clear
 		puts "Sadly, your quest has ended."
 		puts "Because you died."
 		case prompt("Would you like to [s]tart again, or [q]uit?",:s,:q)
@@ -149,6 +212,11 @@ eom
 	def save_and_shutdown
 		# TODO: persist high scores, player if they are alive, etc
 		puts "Good bye!"
+		@play = false
+	end
+
+	def clear
+		system("clear")
 	end
 
 

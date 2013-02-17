@@ -6,11 +6,12 @@ class Player < Character
 	attr_reader :xp, :level
 	def initialize(name)
 		super(name)
-		@weapon = Weapon.new("calloused fists", "punch", 3)
-		@armor = Armor.new("sweaty t-shirt", "gets caught in the fold of", 1)
+		@weapon = Weapon.new("calloused fists", "punch", 3, 0)
+		@armor = Armor.new("sweaty t-shirt", "gets caught in the fold of", 1, 10)
 		@gold = 0
 		@level = 1
 		@xp = 0
+		@hp_max = @hp
 	end
 
 	def attack(target)
@@ -51,5 +52,36 @@ class Player < Character
 		@gold = @gold + gold
 		puts "You've gained #{gold} gold!"
 	end
+
+	def lose_gold(gold = @gold / 4)
+		@gold = @gold - gold
+	end
+
+	def purchase_armor(select, store)
+		old_armor = @armor
+		armor = store[select.to_i-1]
+		if @gold >= armor["cost"]
+			@armor = Armor.new(armor["name"], armor["use"], armor["armor_value"], armor["cost"])
+			@gold = @gold - armor["cost"] + old_armor.cost
+			puts "Sold! You are now the proud owner of #{@armor.name}! I even gave you #{old_armor.cost / 2} for that old #{old_armor.name}!"
+			return true
+		else
+			puts "I am sorry, you don't have enough gold, and I don't do charity!"
+			return false
+		end
+	end
+
+	def inn(cost)
+		if @gold >= cost
+			@gold = @gold - cost
+			puts "You pay the tab, and walk up to your room, where you get a good rest, and all your injuries magically heal."
+			@hp = @hp_max
+			return true
+		else
+			puts "I'm sorry, hon. You've got to pay to stay."
+			return false
+		end
+	end
+
 
 end
