@@ -3,6 +3,25 @@ Legend of the Ruby Dragon
 
 A text based RPG shamelessly inspired by an old doors game. It is ugly, but fun (both the coding and the game).
 
+Objectives:
+-----------
+
+* Implement a game engine built around easily editable json files, to allow end users to customize their experience in game without a great deal of programming expertise
+* Improve my ruby skills, as well as Ana's
+* Improve my understanding of ruby idioms, to that end please feel free to ping me if you see ways to make it more "ruby-ish"
+* Possibly at some point make it an actual multi-user game, like it used to be in ye olde BBS times... possibly browser based?
+
+Installation:
+-------------
+
+For now, installation is as easy as cloning the repository, and running
+
+	ruby LotRD.rb
+
+You may (on older versions of ruby I believe) need to install the json gem:
+
+	gem install json
+
 Licensing:
 ----------
 
