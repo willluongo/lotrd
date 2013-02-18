@@ -1,0 +1,26 @@
+[
+{
+	"name":"brass knuckles",
+	"use":"punch",
+	"cost":10,
+	"attack_value":5
+},
+{
+	"name":"rubber dagger",
+	"use":"annoy",
+	"cost":30,
+	"attack_value":7
+},
+{
+	"name":"broken keyboard",
+	"use":"smack",
+	"cost":50,
+	"attack_value":9
+},
+{
+	"name":"hatchet",
+	"use":"smash, smash, smayush",
+	"cost":150,
+	"attack_value":12
+}
+]

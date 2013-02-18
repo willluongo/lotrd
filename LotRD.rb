@@ -7,6 +7,7 @@ class LotRD
 	def initialize()
 		@forest_monsters = JSON.load(File.open('./forest_monsters.json').read)
 		@armor_store = JSON.load(File.open('./armor.json').read)
+		@weapon_store = JSON.load(File.open('./weapon.json').read)
 		@log = Logger.new("lotrd.log")
 		@log.level = Logger::DEBUG
 		@play = true
@@ -40,7 +41,7 @@ class LotRD
 
 	# Prompt is the workhorse of user interactions
     #
-    # * no arguments defaults to "Hit enter to continue"
+    # * No arguments defaults to "Hit enter to continue"
     # * One argument is basically a pause with a custom prompt
     # * Automatically handles invalid choices, only returns a valid selection
 
@@ -85,6 +86,8 @@ eom
 			visit_inn
 		when "a"
 			visit_armory
+		when "w"
+			visit_weaponry
 		else
 			prompt "Sorry, that isn't implemented yet. Press enter to continue."
 		end
@@ -168,7 +171,6 @@ eom
 			item_string = item_string + "\n[#{item_no}] A #{item["name"]}. Armor value #{item["armor_value"]}. Cost: #{item["cost"]} gold."
 			item_list.push(item_no)
 		end
-		# TODO: Add option to sell armor
 		select = prompt(item_string + "\n[L]eave the store", *item_list, :l)
 		if select == "l"
 			# drop out to main menu
@@ -178,6 +180,31 @@ eom
 			else
 				prompt
 				visit_armory
+			end
+		end
+	end
+
+	def visit_weaponry
+		@log.debug(@weapon_store)
+		clear
+		puts "Welcome to the Weapon Shop!"
+		item_string = ""
+		item_no = 0
+		item_list = []
+		@weapon_store.each do |item|
+			item_no = item_no + 1
+			item_string = item_string + "\n[#{item_no}] A #{item["name"]}. Attack value #{item["attack_value"]}. Cost: #{item["cost"]} gold."
+			item_list.push(item_no)
+		end
+		select = prompt(item_string + "\n[L]eave the store", *item_list, :l)
+		if select == "l"
+			# drop out to main menu
+		else
+			if @player.purchase_weapon(select, @weapon_store)
+				prompt
+			else
+				prompt
+				visit_weaponry
 			end
 		end
 	end

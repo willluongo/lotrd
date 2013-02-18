@@ -71,6 +71,20 @@ class Player < Character
 		end
 	end
 
+	def purchase_weapon(select, store)
+		old_weapon = @weapon
+		weapon = store[select.to_i-1]
+		if @gold >= weapon["cost"]
+			@weapon = Weapon.new(weapon["name"], weapon["use"], weapon["attack_value"], weapon["cost"])
+			@gold = @gold - weapon["cost"] + old_weapon.cost
+			puts "Sold! You are now the proud owner of #{@weapon.name}! I even gave you #{old_weapon.cost / 2} gold for that old #{old_weapon.name}!"
+			return true
+		else
+			puts "I am sorry, you don't have enough gold, and I don't do charity!"
+			return false
+		end
+	end
+
 	def inn(cost)
 		if @gold >= cost
 			@gold = @gold - cost
