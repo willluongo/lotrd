@@ -2,6 +2,8 @@ require 'json'
 require 'logger'
 require_relative 'player.rb'
 require_relative 'mob.rb'
+require_relative 'trainer.rb'
+require_relative 'prompt.rb'
 
 class LotRD
 	def initialize()
@@ -88,6 +90,8 @@ eom
 			visit_armory
 		when "w"
 			visit_weaponry
+		when "t"
+			visit_trainer @player
 		else
 			prompt "Sorry, that isn't implemented yet. Press enter to continue."
 		end
@@ -157,6 +161,11 @@ eom
 			end
 			prompt
 		end
+	end
+
+	def visit_trainer(player)
+		trainer = Trainer.new(player)
+		trainer.shop
 	end
 
 	def visit_armory
