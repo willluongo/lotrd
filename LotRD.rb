@@ -27,7 +27,7 @@ class LotRD
 		@log.debug(@player)
 		puts "Hello, #{@player.name}! You look like a strong chap."
 		puts "Do you need some directions, or are you ready to get right into it?"
-		case prompt("[H]elp me get started\n[N]o, I am ready.", "h", "n")
+		case prompt("[H]elp me get started\n[N]o, I am ready.")
 		when "h"
 			display_help
 		when "n"
@@ -39,26 +39,6 @@ class LotRD
 			main_menu
 		end
 
-	end
-
-	# Prompt is the workhorse of user interactions
-    #
-    # * No arguments defaults to "Hit enter to continue"
-    # * One argument is basically a pause with a custom prompt
-    # * Automatically handles invalid choices, only returns a valid selection
-
-	def prompt(string = "Hit enter to continue", *args)
-		args.map! {|item| item.to_s.downcase}
-		puts string
-		if args.length == 0
-			gets
-			return nil
-		else
-			unless args.include?(choice = gets.chomp.downcase)
-				return prompt((string.include?("Invalid selection.") ? string : "Invalid selection. Please try the options in brackets []\n" + string), *args)
-			end
-			return choice
-		end
 	end
 
 	def display_help
@@ -79,7 +59,7 @@ Go to the [A]rmor Shop
 [R]est at the inn
 E[x]it and save
 eom
-		case prompt(menu, :f, :t, :w, :a, :r, :x)
+		case prompt(menu)
 		when "x"
 			save_and_shutdown
 		when "f"
@@ -119,7 +99,7 @@ eom
 			puts "But a #{mob.name} finds you first, and he doesn't look happy about it!"
 			mob.attack(@player)
 			if @player.hp > 0
-				case prompt("You have #{@player.hp} hitpoints.\nThe #{mob.name} has #{mob.hp} hitpoints.\n[A]ttack the #{mob.name}!\n[R]un away!", :a, :r)
+				case prompt("You have #{@player.hp} hitpoints.\nThe #{mob.name} has #{mob.hp} hitpoints.\n[A]ttack the #{mob.name}!\n[R]un away!")
 				when "a"
 					@player.attack(mob)
 					if mob.alive
@@ -132,7 +112,7 @@ eom
 		else
 			# Player goes first!
 			puts "You come across a #{mob.name}... a perfect target!"
-			case prompt("You have #{@player.hp} hitpoints.\nThe #{mob.name} has #{mob.hp} hitpoints.\n[A]ttack the #{mob.name}!\n[R]un away!", :a, :r)
+			case prompt("You have #{@player.hp} hitpoints.\nThe #{mob.name} has #{mob.hp} hitpoints.\n[A]ttack the #{mob.name}!\n[R]un away!")
 			when "a"
 				@player.attack(mob)
 				if mob.alive
@@ -180,7 +160,7 @@ eom
 			item_string = item_string + "\n[#{item_no}] A #{item["name"]}. Armor value #{item["armor_value"]}. Cost: #{item["cost"]} gold."
 			item_list.push(item_no)
 		end
-		select = prompt(item_string + "\n[L]eave the store", *item_list, :l)
+		select = prompt(item_string + "\n[L]eave the store")
 		if select == "l"
 			# drop out to main menu
 		else
@@ -205,7 +185,7 @@ eom
 			item_string = item_string + "\n[#{item_no}] A #{item["name"]}. Attack value #{item["attack_value"]}. Cost: #{item["cost"]} gold."
 			item_list.push(item_no)
 		end
-		select = prompt(item_string + "\n[L]eave the store", *item_list, :l)
+		select = prompt(item_string + "\n[L]eave the store")
 		if select == "l"
 			# drop out to main menu
 		else
@@ -221,7 +201,7 @@ eom
 	def visit_inn
 		clear
 		puts "Welcome to the Ruby Dragon Inn!"
-		case prompt("[S]tay for the night, and recover from today's adventures. (10 Gold)\n[L]eave.", :s, :l)
+		case prompt("[S]tay for the night, and recover from today's adventures. (10 Gold)\n[L]eave.")
 		when "s"
 			if @player.inn(10)
 				prompt
@@ -242,7 +222,7 @@ eom
 		clear
 		puts "Sadly, your quest has ended."
 		puts "Because you died."
-		case prompt("Would you like to [s]tart again, or [q]uit?",:s,:q)
+		case prompt("Would you like to [s]tart again, or [q]uit?")
 		when "s"
 			game = LotRD.new
 			game.start

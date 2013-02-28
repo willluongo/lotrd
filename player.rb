@@ -3,7 +3,7 @@ require './weapon.rb'
 require './armor.rb'
 
 class Player < Character
-	attr_reader :xp, :level
+	attr_reader :xp, :level, :gold
 	def initialize(name)
 		super(name)
 		@weapon = Weapon.new("calloused fists", "punch", 3, 0)
