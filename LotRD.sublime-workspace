@@ -3,6 +3,62 @@
 	{
 		"selected_items":
 		[
+			[
+				"old_",
+				"old_weapon"
+			],
+			[
+				"visit",
+				"visit_inn"
+			],
+			[
+				"to",
+				"to_i"
+			],
+			[
+				"old",
+				"old_armor"
+			],
+			[
+				"gain",
+				"gain_gold"
+			],
+			[
+				"item",
+				"item_string"
+			],
+			[
+				"arm",
+				"armor_store"
+			],
+			[
+				"r",
+				"r	attr_reader .."
+			],
+			[
+				"sa",
+				"save_and_shutdown"
+			],
+			[
+				"max",
+				"max_damage"
+			],
+			[
+				"foe",
+				"foe_level"
+			],
+			[
+				"fo",
+				"foe_choices"
+			],
+			[
+				"fores",
+				"forest_monsters"
+			],
+			[
+				"fore",
+				"forest_monsters"
+			]
 		]
 	},
 	"buffers":
@@ -11,9 +67,17 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 47.0,
+		"height": 207.0,
 		"selected_items":
 		[
+			[
+				"todo",
+				"Show TODOs: Open files only"
+			],
+			[
+				"show",
+				"Show TODOs: Open files only"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -60,6 +124,21 @@
 	},
 	"file_history":
 	[
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/lotrd.log",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/weapon.json",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/armor.json",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/forest_monsters.json",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/README.md",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/item.rb",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/weapon.rb",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/armor.rb",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/.gitignore",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/mob.rb",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/char.rb",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/help.txt",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/LotRD.rb",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/player.rb",
+		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/LotRD.sublime-project",
 		"/Users/will/Documents/Legend_of_the_Ruby_Dragon/untitled.sublime-project",
 		"/Users/will/Library/Application Support/Sublime Text 2/Packages/Theme - Default/Widget.sublime-settings",
 		"/Users/will/Library/Application Support/Sublime Text 2/Packages/Ruby/Ruby.sublime-build",
@@ -67,7 +146,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -81,6 +160,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"enter\nenter",
+			"any",
+			"enter",
+			"rnd"
 		],
 		"highlight": true,
 		"in_selection": false,

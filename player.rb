@@ -15,6 +15,7 @@ class Player < Character
 	end
 
 	def attack(target)
+		# TODO add level modifier
 		rnd = Random.new(Time.now.to_i)
 		damage = rnd.rand(@weapon.damage)
 		if damage > 0
@@ -27,6 +28,7 @@ class Player < Character
 	end
 
 	def defend(damage, attacker, weapon)
+		#TODO implement armor values
 		@hp = @hp - damage
 		if @hp <= 0 
 			die(attacker, weapon)
@@ -83,6 +85,12 @@ class Player < Character
 			puts "I am sorry, you don't have enough gold, and I don't do charity!"
 			return false
 		end
+	end
+
+	def level_up
+		@level = @level + 1
+		@xp = @xp - 100
+		puts "You are now a level #{@level}!"
 	end
 
 	def inn(cost)
