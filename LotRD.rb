@@ -62,7 +62,7 @@ class LotRD
 
 	def display_help
 		# TODO: Improve quality of in game help
-		puts File.open('./help.txt').read
+		puts File.open("#{@data}help.txt").read
 		prompt("Got it? Good. Press enter.")
 	end
 
