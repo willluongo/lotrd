@@ -1,4 +1,4 @@
-require './item.rb'
+require_relative './item.rb'
 
 class Weapon < Item
 	attr_reader :damage, :cost

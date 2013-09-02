@@ -1,6 +1,6 @@
-require './char.rb'
-require './weapon.rb'
-require './armor.rb'
+require_relative 'char.rb'
+require_relative 'weapon.rb'
+require_relative 'armor.rb'
 
 class Player < Character
 	attr_reader :xp, :level

@@ -1,4 +1,4 @@
-require './char.rb'
+require_relative 'char.rb'
 
 class Mob < Character
 	attr_reader :alive
