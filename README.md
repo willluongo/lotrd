@@ -1,6 +1,7 @@
 Legend of the Ruby Dragon
 =========================
 [![Build Status](https://travis-ci.org/willluongo/lotrd.png?branch=adding_tests)](https://travis-ci.org/willluongo/lotrd)
+[![Coverage Status](https://coveralls.io/repos/willluongo/lotrd/badge.png)](https://coveralls.io/r/willluongo/lotrd)
 [![Dependency Status](https://gemnasium.com/willluongo/lotrd.png)](https://gemnasium.com/willluongo/lotrd)
 
 A text based RPG shamelessly inspired by an old doors game. It is ugly, but fun (both the coding and the game).
