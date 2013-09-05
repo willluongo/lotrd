@@ -1,11 +1,11 @@
 require 'json'
 require 'logger'
-require_relative 'lib/player.rb'
-require_relative 'lib/mob.rb'
+require_relative 'player.rb'
+require_relative 'mob.rb'
 
 class LotRD
 	def initialize()
-		@data ="data/"
+		@data ="../data/"
 		@forest_monsters = JSON.load(File.open("#{@data}forest_monsters.json").read)
 		@armor_store = JSON.load(File.open("#{@data}armor.json").read)
 		@weapon_store = JSON.load(File.open("#{@data}/weapon.json").read)
