@@ -4,7 +4,8 @@ require_relative 'player.rb'
 require_relative 'mob.rb'
 
 class LotRD
-	def initialize()
+	def initialize(output)
+		@output = output
 		@data ="../data/"
 		@forest_monsters = JSON.load(File.open("#{@data}forest_monsters.json").read)
 		@armor_store = JSON.load(File.open("#{@data}armor.json").read)
@@ -21,7 +22,7 @@ class LotRD
 
 
 	def start
-		puts "What is your name?"
+		@output.puts "What is your name?"
 		@player = Player.new(gets.chomp)
 		@log.debug(@player)
 		puts "Hello, #{@player.name}! You look like a strong chap."
@@ -254,9 +255,4 @@ eom
 	end
 
 
-end
-
-if __FILE__ == $0
-	game = LotRD.new()
-	game.start
 end
