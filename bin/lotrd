@@ -2,5 +2,5 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'lotrd'
 
-game = LotRD.new()
+game = LotRD.new(STDOUT)
 game.start
