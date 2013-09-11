@@ -4,11 +4,21 @@ require_relative 'player.rb'
 require_relative 'mob.rb'
 
 class LotRD
+	attr_accessor :input, :output
+
+	def puts(*args)
+    	@output.puts(*args)    
+  	end
+ 
+  	def gets(*args)
+    	@output.gets(*args)
+  	end
+
 	def initialize(output)
 		@output = output
-		@data ="data/"
-		@forest_monsters = JSON.load(File.open("#{@data}forest_monsters.json").read)
-		@armor_store = JSON.load(File.open("#{@data}armor.json").read)
+		@data = File.join(File.dirname(__FILE__), '..', 'data')
+		@forest_monsters = JSON.load(File.open("#{@data}/forest_monsters.json").read)
+		@armor_store = JSON.load(File.open("#{@data}/armor.json").read)
 		@weapon_store = JSON.load(File.open("#{@data}/weapon.json").read)
 		@log = Logger.new("lotrd.log")
 		@log.level = Logger::DEBUG
@@ -20,11 +30,13 @@ class LotRD
 		return rnd.rand(limit)
 	end
 
-
-	def start
-		@output.puts "What is your name?"
+	def get_started
+		puts "What is your name?"
 		@player = Player.new(gets.chomp)
 		@log.debug(@player)
+	end
+
+	def get_help
 		puts "Hello, #{@player.name}! You look like a strong chap."
 		puts "Do you need some directions, or are you ready to get right into it?"
 		case prompt("[H]elp me get started\n[N]o, I am ready.", "h", "n")
@@ -35,6 +47,13 @@ class LotRD
 		else
 			puts "Somehow you tricked my menu!"
 		end
+	end
+
+
+
+	def start
+		get_started
+
 		while @play
 			main_menu
 		end
