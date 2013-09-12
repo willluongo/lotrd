@@ -10,11 +10,12 @@ class LotRD
     	@output.puts(*args)    
   	end
  
-  	def gets(*args)
-    	@output.gets(*args)
-  	end
+  	# def gets(*args)
+   #  	@input.gets(*args)
+  	# end
 
-	def initialize(output)
+	def initialize(output = STDOUT, input = STDIN)
+		@input = input
 		@output = output
 		@data = File.join(File.dirname(__FILE__), '..', 'data')
 		@forest_monsters = JSON.load(File.open("#{@data}/forest_monsters.json").read)
